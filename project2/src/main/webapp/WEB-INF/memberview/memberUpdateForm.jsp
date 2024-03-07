@@ -22,7 +22,7 @@
 			</div>
 			<div class="mb-3">
 				<label for="idInput" class="form-label">아이디</label>
-				<input type="text" name="id" value="${member.id}" class="form-control" id="idInput" placeholder="아이디">
+				<input type="text" readonly name="id" value="${member.id}" class="form-control" id="idInput" placeholder="아이디는 수정이 불가능 합니다">
 			</div>
 			<div class="mb-3">
 				<label for="exampleFormControlInput1" class="form-label">이메일</label>

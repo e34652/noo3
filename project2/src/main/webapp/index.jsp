@@ -32,7 +32,7 @@
 			</ul>
 
 			<ul class="util">
-				<c:if test="${loginStatus eq 'admin'}">
+				<c:if test="${loginStatus eq 'admin'}">		
 					<li><a href="memberList.do">Administration</a></li>
 				</c:if>
 				<c:choose>
@@ -133,10 +133,6 @@
 			</div>
 		</div>
 	</footer>
-
-
-
-
 </body>
 
 </html>

@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import dto.Board;
 
@@ -68,7 +69,6 @@ public class BoardDao {
 				Board board = new Board(rs.getInt("num"), rs.getString("title"), rs.getString("content"),
 						rs.getString("regtime"), rs.getInt("hits"), rs.getInt("memberno"), rs.getString("name"));
 				list.add(board);
-				System.out.println(board);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -140,9 +140,7 @@ public class BoardDao {
 		try (PreparedStatement pstmt = conn.prepareStatement(sql);) {
 			// 현재 시간 얻기 mysql = now() / oracle = sysdate
 			pstmt.setString(1, board.getTitle());
-			
 			pstmt.setString(2, board.getContent());
-			
 			pstmt.setInt(3, board.getMemberno());
 			return pstmt.executeUpdate();
 
@@ -153,12 +151,12 @@ public class BoardDao {
 	}
 
 	public int update(Board board) {
-		String sql = "update board set title=?, content=?, regtime=TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS') where num=?";
+		String sql = "update board set title=?, content=?, regtime=sysdate where num=?";
 		try (PreparedStatement pstmt = conn.prepareStatement(sql);) {
-
 			pstmt.setString(1, board.getTitle());
 			pstmt.setString(2, board.getContent());
 			pstmt.setInt(3, board.getNum());
+			System.out.println(board);
 			return pstmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -166,5 +164,45 @@ public class BoardDao {
 		}
 		return 0;
 	}
+	public ArrayList<Board> search(String option, String keyword) {
+		ArrayList<Board> list = new ArrayList<>();
+		String sql = "select b.*, m.name from board b inner join member m on b.memberno = m.memberno where b."+ option +" like ?";
+		try (PreparedStatement pstmt = conn.prepareStatement(sql);) {
+			pstmt.setString(1, "%" + keyword + "%");
+			
+			ResultSet rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				Board board = new Board(rs.getInt("num"), rs.getString("title"), rs.getString("content"),
+					rs.getString("regtime"), rs.getInt("hits"), rs.getInt("memberno"), rs.getString("name"));
+			list.add(board);
+				
+			}
+			
+			return list;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	public int countForSearch(String option, String keyword) {
+		String sql = "select count(*) from board where "+ option +" like ?";
+		
+		try (PreparedStatement pstmt = conn.prepareStatement(sql);) {
+			pstmt.setString(1, "%" + keyword + "%");
+			
+			ResultSet rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				return rs.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
 
 }

@@ -4,7 +4,6 @@ import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -47,11 +46,11 @@ public class AutoLoginFilter extends HttpFilter implements Filter {
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         
         HttpSession session = httpRequest.getSession(true);
-        if (session.getAttribute("login") != null) {
+        if (session !=null && session.getAttribute("login") != null ) {
             chain.doFilter(request, response);
             httpResponse.sendRedirect("index.do");
-            return;
-        }
+            return;}
+ 
 
         // 쿠키에서 사용자 정보 가져오기
 	        String id = null;
@@ -75,7 +74,8 @@ public class AutoLoginFilter extends HttpFilter implements Filter {
         // 필터 체인 진행
         chain.doFilter(request, response);
         httpResponse.sendRedirect("index.do");
-    }
+        }
+    
 
 	/**
 	 * @see Filter#init(FilterConfig)

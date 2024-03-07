@@ -17,12 +17,10 @@ public class Board {
 		this.title = title;
 		this.content = content;
 	}
-	public Board(int num,String title, String content, String regtime, int memberno, String name) {
+	public Board(String title, String content,  int memberno, String name) {
 		super();
-		this.num = num;
 		this.title = title;
 		this.content = content;
-		this.regtime = regtime;
 		this.memberno = memberno;
 		this.name = name;
 	}

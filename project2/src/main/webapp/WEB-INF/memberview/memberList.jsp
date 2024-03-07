@@ -38,6 +38,7 @@ request.setCharacterEncoding("UTF-8");
 						aria-disabled="true">회원관리</a></li>
 				</ul>
 				<form class="d-flex" role="search">
+				
 					<input class="form-control me-2" type="search" placeholder="Search"
 						aria-label="Search">
 					<button class="btn btn-outline-success" type="submit">Search</button>
@@ -80,12 +81,17 @@ request.setCharacterEncoding("UTF-8");
 
 			<c:if test="${ArticleM.hasArticles()}">
 				<tr>
-					<td colspan="5"><c:if test="${ArticleM.startPage > 5}">
-							<a href="memberList.do?pageNo=${ArticleM.startPage - 5}">[이전]</a>
-						</c:if> <c:forEach var="pNo" begin="${ArticleM.startPage}"
+					<td colspan="5">
+					<c:if test="${ArticleM.startPage > 5}">
+							<a href="memberList.do?pageNo=${ArticleM.startPage - 5}">[이전]</a>	
+						</c:if> 
+						
+						<c:forEach var="pNo" begin="${ArticleM.startPage}"
 							end="${ArticleM.endPage}">
 							<a href="memberList.do?pageNo=${pNo}">[${pNo}]</a>
-						</c:forEach> <c:if test="${ArticleM.endPage < ArticleM.totalPages}">
+						</c:forEach> 
+						
+						<c:if test="${ArticleM.endPage < ArticleM.totalPages}">
 							<a href="memberList.do?pageNo=${ArticleM.startPage + 5}">[다음]</a>
 						</c:if></td>
 				</tr>

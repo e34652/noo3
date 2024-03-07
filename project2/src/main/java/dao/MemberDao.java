@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLSyntaxErrorException;
 import java.util.ArrayList;
+
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 
 import dto.Board;
@@ -114,7 +116,7 @@ public class MemberDao {
 
 	public ArrayList<Member> selectPage(int startRow, int size) {
 		ArrayList<Member> list = new ArrayList<>();
-			String sql = "SELECT * FROM (SELECT ROWNUM AS rm, m.* FROM (SELECT * FROM member m ORDER BY memberno) m) WHERE rm BETWEEN ? AND ?";
+			String sql = "SELECT * FROM (SELECT ROWNUM AS rm, m.* FROM (SELECT * FROM member m WHERE NOT MEMBERNO = 1 ORDER BY memberno ) m)WHERE rm BETWEEN ? AND ?";
 		PreparedStatement pstmt;
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -127,7 +129,7 @@ public class MemberDao {
 			while (rs.next()) {
 				Member member = new Member(rs.getInt("memberno"), rs.getString("id"), rs.getString("email"),
 						rs.getString("name"));
-				System.out.println(member);
+				
 				list.add(member);
 				
 			}
@@ -184,5 +186,6 @@ public class MemberDao {
 		}
 		return 0;
 	}
+	
 
 }
