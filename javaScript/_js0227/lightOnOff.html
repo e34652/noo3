@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #dv1{
+            width: 270px;
+            height: 250px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            padding: 20px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id = "dv1">
+    <img id="myImage" src="light-bulb2.png" onclick = "changeImage()" >
+</div>
+    <button onclick ="lightOn()">켜기</button>
+    <button onclick ="lightOff()">끄기</button>
+    <script>
+        function changeImage(){
+
+            let image = document.querySelector("#myImage");
+            console.log(image.src)
+            if(image.src.match("light-bulb2.png")){
+                image.src = "light-bulb1.png";
+                dv1.style.backgroundColor ="gray";
+            }else{
+                image.src="light-bulb2.png";
+                dv1.style.backgroundColor ="black";
+            }
+        }
+        function lightOn(){
+            document.querySelector("img").src = "light-bulb1.png"
+        }
+        function lightOff(){
+            document.querySelector("img").src = "light-bulb2.png"
+        }
+    </script>
+</body>
+</html>

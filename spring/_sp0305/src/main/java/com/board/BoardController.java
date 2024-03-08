@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.board.BoardService;
-
 @WebServlet("/")
 public class BoardController extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -68,9 +66,11 @@ public class BoardController extends HttpServlet {
             String writer  = request.getParameter("writer" );
             String title   = request.getParameter("title"  );
             String content = request.getParameter("content");
+            String num = request.getParameter("memberno");
+            int memberno = Integer.parseInt(num);
 
             try {
-                new BoardService().writeMsg(writer, title, content);
+                new BoardService().writeMsg(writer, title, content, memberno);
                 view = "redirect:list";
 
             } catch(Exception e) {
@@ -99,23 +99,24 @@ public class BoardController extends HttpServlet {
 
             new BoardService().deleteMsg(num);
             view = "redirect:list";
-            
-        }else if(com.equals("/loginForm")){
+        } else if (com.equals("/loginForm")) {
         	view = "loginForm.jsp";
-        }else if (com.equals("/login")) {
+        } else if (com.equals("/login")) {
         	String id = request.getParameter("id");
         	String pw = request.getParameter("pw");
         	MemberDto memberDto = new MemberDao().selectMember(id, pw);
-        	if(memberDto.getMemberno() == 0) {
+        	if (memberDto.getMemberno() == 0) {
         		System.out.println("로그인 실패");
         		view = "redirect:loginForm";
-        	}else {
+        	} else {
         		System.out.println(memberDto);
         		HttpSession session = request.getSession();
         		session.setAttribute("member", memberDto);
         		view = "redirect:list";
         	}
+        	
         }
+
         // view에 담긴 문자열에 따라 포워딩 또는 리다이렉팅
         if (view.startsWith("redirect:")) {
             response.sendRedirect(view.substring(9));

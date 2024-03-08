@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id = "gugu"></div>
+    <table id="guguTable" border="line">
+        <tr>
+            <td>2단</td>
+            <td>3단</td>
+            <td>4단</td>
+            <td>5단</td>
+            <td>6단</td>
+            <td>7단</td>
+            <td>8단</td>
+            <td>9단</td> 
+        </tr>
+    <script>
+        let gugu = document.querySelector("#gugu"); 
+        gugu.innerHTML = "<h1>구구단</h1>";
+       
+   document.write(`<table border ="1" id = "guguTable">`)
+    let table = document.querySelector("#guguTable");
+        for(let i = 1; i <=9; i++){
+            let row = document.createElement("tr");
+            for(let j = 2; j<=9; j++){
+                let cell = document.createElement("td");             
+                cell.innerHTML = i*j;
+                row.appendChild(cell);
+            }
+            
+            table.appendChild(row); 
+        }
+    </script>
+    </table>
+</body>
+</html>

@@ -5,13 +5,12 @@ import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;;
+import lombok.ToString;
 
 @AllArgsConstructor
-@Getter
 @Setter
+@Getter
 @ToString
-
 public class Member {
 
 	private Long id;
@@ -19,18 +18,21 @@ public class Member {
 	private String password;
 	private String name;
 	private LocalDateTime registerDateTime;
-	
-	public Member(String email, String password, String name, LocalDateTime registerDateTime) {
+
+	public Member(String email, String password, 
+			String name, LocalDateTime regDateTime) {
 		this.email = email;
 		this.password = password;
 		this.name = name;
-		this.registerDateTime = registerDateTime;
+		this.registerDateTime = regDateTime;
 	}
 
-	public void changepassword(String oldPassword, String newPassword) {
-		if(!password.equals(oldPassword)) {
+
+
+	public void changePassword(String oldPassword, String newPassword) {
+		if (!password.equals(oldPassword))
 			throw new WrongIdPasswordException();
-		}
 		this.password = newPassword;
 	}
+
 }

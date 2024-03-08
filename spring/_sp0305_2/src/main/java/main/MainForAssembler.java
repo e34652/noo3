@@ -15,24 +15,24 @@ import spring.WrongIdPasswordException;
 public class MainForAssembler {
 
 	public static void main(String[] args) throws IOException {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		BufferedReader reader = 
+				new BufferedReader(new InputStreamReader(System.in));
 		while (true) {
-			System.out.println("명령어를 입력하세요.");
+			System.out.println("명령어를 입력하세요:");
 			String command = reader.readLine();
 			if (command.equalsIgnoreCase("exit")) {
 				System.out.println("종료합니다.");
 				break;
 			}
-			if (command.startsWith("new")) {
+			if (command.startsWith("new ")) {
 				processNewCommand(command.split(" "));
 				continue;
-			} else if (command.startsWith("change")) {
+			} else if (command.startsWith("change ")) {
 				processChangeCommand(command.split(" "));
 				continue;
 			}
 			printHelp();
 		}
-
 	}
 
 	private static Assembler assembler = new Assembler();
@@ -48,7 +48,7 @@ public class MainForAssembler {
 		req.setName(arg[2]);
 		req.setPassword(arg[3]);
 		req.setConfirmPassword(arg[4]);
-
+		
 		if (!req.isPasswordEqualToConfirmPassword()) {
 			System.out.println("암호와 확인이 일치하지 않습니다.\n");
 			return;
@@ -57,9 +57,8 @@ public class MainForAssembler {
 			regSvc.regist(req);
 			System.out.println("등록했습니다.\n");
 		} catch (DuplicateMemberException e) {
-			System.out.println("이미 존재하는 이메일입니다\n");
+			System.out.println("이미 존재하는 이메일입니다.\n");
 		}
-
 	}
 
 	private static void processChangeCommand(String[] arg) {
@@ -67,7 +66,8 @@ public class MainForAssembler {
 			printHelp();
 			return;
 		}
-		ChangePasswordService changePwdSvc = assembler.getChangePasswordService();
+		ChangePasswordService changePwdSvc = 
+				assembler.getChangePasswordService();
 		try {
 			changePwdSvc.changePassword(arg[1], arg[2], arg[3]);
 			System.out.println("암호를 변경했습니다.\n");
