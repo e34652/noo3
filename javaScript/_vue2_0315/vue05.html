@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+<p>{{$data}}</p>
+<hr>
+<li v-for="item in $data">{{item}}</li>
+<hr>
+<li v-for="(x,y) in $data">{{x}} : {{y}}</li>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+    <script>
+
+        new Vue({
+            el: '#app',
+            data:{
+                myText:'Hello',
+                myNumber:12345,
+                myBool:true,
+                myArray:[1,2,3,4,5]
+            }
+        })
+    </script>
+</body>
+</html>

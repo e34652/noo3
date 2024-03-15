@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p>{{msg}}</p>
+        <p v-text ="msg">{{msg}}</p> 
+        <p v-html ="msg">{{msg}}</p> 
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+    <script>
+         const app = new Vue({ // 요소를 선택해 직접 수정
+            el: '#app', // 요소 선택
+            data:  { 
+                msg: '<h1>Hello Vue!</h1>' // << 내용을 설명하는 객체 << 변수로 대체가능
+            }// <p>에 text로 msg를 삽입
+        });
+    </script>
+</body>
+</html>

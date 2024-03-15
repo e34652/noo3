@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p>{{count}}회</p> 
+    <button v-on:click="countUp">클릭</button>
+    <button v-on:click="countDown">감소</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+    <script>
+        const app = new Vue({ // 요소를 선택해 직접 수정
+            el: '#app', // 요소 선택
+
+            data:  { // 데이터 선언란 (변수선언)
+                count: 0 //data는 {{}}를 통해 출력
+            },
+
+            methods:{ // 함수 선언란
+                countUp:function(){
+                    this.count++;
+                },
+                countDown:function(){
+                    this.count--;
+                }
+            }
+       
+        });
+    
+    </script>
+</body>
+</html>

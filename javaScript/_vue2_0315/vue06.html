@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <img src="face1.png" alt="이미지" />
+      <img v-bind:src="imgname" alt="이미지" />
+      <hr />
+      <a v-bind:href="naverURL" v-bind:style="{color:mycolor, backgroundColor:mybackground}">네이버</a>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          imgname: "face2.png",
+          naverURL: "http://www.naver.com",
+          mycolor: 'red',
+          mybackground: 'green'
+        },
+      });
+    </script>
+  </body>
+</html>
